@@ -1,3 +1,8 @@
+
+import java.awt.event.KeyEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +20,11 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
      */
     public AplikasiKonversiSuhu() {
         initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(jRadio1);
+        group.add(jRadio2);
+        group.add(jRadio3);
+        group.add(jRadio4);
     }
 
     /**
@@ -40,9 +50,31 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPanel1KeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Masukkan Suhu");
 
-        comboBoxScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celcius", "Fahrenheit", "Reamur", "Kelvin" }));
+        textFieldInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldInputActionPerformed(evt);
+            }
+        });
+        textFieldInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textFieldInputKeyTyped(evt);
+            }
+        });
+
+        comboBoxScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius", "Fahrenheit", "Reamur", "Kelvin" }));
+        comboBoxScale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxScaleActionPerformed(evt);
+            }
+        });
 
         buttonConvert.setText("Konversi");
         buttonConvert.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +85,7 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
 
         jRadio1.setSelected(true);
         jRadio1.setText("Celcius To Fahrenheit");
+        jRadio1.setToolTipText("");
         jRadio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadio1ActionPerformed(evt);
@@ -68,6 +101,11 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
         jLabel2.setText("Hasil Konversi");
 
         jRadio2.setText("Fahrenheit To Celcius");
+        jRadio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadio2ActionPerformed(evt);
+            }
+        });
 
         jRadio3.setText("Celcius To Reamur");
         jRadio3.addActionListener(new java.awt.event.ActionListener() {
@@ -86,53 +124,49 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(comboBoxScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(textFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addComponent(comboBoxScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadio2)
                             .addComponent(jRadio1))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadio3)
-                            .addComponent(jRadio4))))
-                .addContainerGap(133, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jRadio4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadio3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(textFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadio1)
-                            .addComponent(jRadio3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadio2)
-                            .addComponent(jRadio4)))
-                    .addComponent(buttonConvert))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(comboBoxScale, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldInput)
+                    .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jRadio1)
+                    .addComponent(jRadio3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadio2)
+                    .addComponent(jRadio4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(textFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,14 +176,14 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,16 +194,96 @@ public class AplikasiKonversiSuhu extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldResultActionPerformed
 
     private void jRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio1ActionPerformed
-        // TODO add your handling code here:
+    jRadio1.addActionListener(e -> System.out.println());    // TODO add your handling code here:
     }//GEN-LAST:event_jRadio1ActionPerformed
 
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
-        // TODO add your handling code here:
+    try {
+        // Mengambil nilai suhu yang dimasukkan oleh pengguna
+        String inputText = textFieldInput.getText();
+
+        // Pengecekan jika input kosong
+        if (inputText.isEmpty()) {
+            textFieldResult.setText("Masukkan suhu yang valid!");
+            return; // Menghentikan proses konversi jika input kosong
+        }
+
+        // Mengonversi input menjadi angka
+        double inputSuhu = Double.parseDouble(inputText);
+
+        // Pengecekan jika suhu terlalu rendah (di bawah -273.15°C atau 0 Kelvin)
+        if (inputSuhu < -273.15) {  // Suhu lebih rendah dari -273.15°C
+            textFieldResult.setText("Suhu terlalu rendah!");
+            return; // Menghentikan proses jika suhu terlalu rendah
+        }
+
+        // Lakukan konversi berdasarkan input yang valid
+        String selectedScale = (String) comboBoxScale.getSelectedItem();  // Pilihan skala suhu
+        double hasilKonversi = 0.0;
+
+        // Mengecek arah konversi yang dipilih dan melakukan konversi berdasarkan skala suhu yang dipilih
+        if ("Celsius".equals(selectedScale)) {
+            if (jRadio1.isSelected()) {
+                hasilKonversi = (inputSuhu * 9 / 5) + 32; // Rumus Celsius ke Fahrenheit
+            } else if (jRadio3.isSelected()) {
+                hasilKonversi = inputSuhu * 4 / 5; // Rumus Celsius ke Reamur
+            } else if (jRadio2.isSelected()) {
+                hasilKonversi = inputSuhu + 273.15; // Celsius ke Kelvin
+            }
+        } else if ("Fahrenheit".equals(selectedScale)) {
+            if (jRadio2.isSelected()) {
+                hasilKonversi = (inputSuhu - 32) * 5 / 9; // Rumus Fahrenheit ke Celsius
+            } else if (jRadio4.isSelected()) {
+                hasilKonversi = (inputSuhu - 32) * 4 / 9; // Rumus Fahrenheit ke Reamur
+            } else if (jRadio2.isSelected()) {
+                hasilKonversi = ((inputSuhu - 32) * 5 / 9) + 273.15; // Fahrenheit ke Kelvin
+            }
+        } else if ("Reamur".equals(selectedScale)) {
+            if (jRadio3.isSelected()) {
+                hasilKonversi = inputSuhu * 4 / 5; // Celsius ke Reamur
+            } else if (jRadio4.isSelected()) {
+                hasilKonversi = (inputSuhu - 32) * 4 / 9; // Fahrenheit ke Reamur
+            } else if (jRadio1.isSelected()) {
+                hasilKonversi = (inputSuhu * 9 / 5) + 32; // Reamur ke Fahrenheit
+            }
+        }
+
+        // Menampilkan hasil konversi di textFieldResult
+        textFieldResult.setText(String.valueOf(hasilKonversi));
+
+    } catch (NumberFormatException e) {
+        textFieldResult.setText("Masukkan suhu yang valid!"); // Jika input bukan angka
+    }    // TODO add your handling code here:
     }//GEN-LAST:event_buttonConvertActionPerformed
 
     private void jRadio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadio3ActionPerformed
+
+    private void textFieldInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldInputActionPerformed
+
+    private void jPanel1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyTyped
+
+    private void textFieldInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldInputKeyTyped
+    char karakter = evt.getKeyChar();
+    // Memeriksa apakah karakter bukan digit dan bukan karakter kontrol (backspace, delete, dll.)
+    if (!Character.isDigit(karakter) && karakter != KeyEvent.VK_BACK_SPACE && karakter != KeyEvent.VK_DELETE) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "Masukkan hanya angka!", "Error", JOptionPane.ERROR_MESSAGE);
+    }    // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldInputKeyTyped
+
+    private void comboBoxScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxScaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxScaleActionPerformed
+
+    private void jRadio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio2ActionPerformed
+    jRadio2.addActionListener(e -> System.out.println("Pilihan 1 dipilih"));    // TODO add your handling code here:
+    }//GEN-LAST:event_jRadio2ActionPerformed
 
     /**
      * @param args the command line arguments
